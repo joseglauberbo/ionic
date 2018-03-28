@@ -1,0 +1,1 @@
+Iniciando estudo sobre ionic pelo udemy;
