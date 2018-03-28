@@ -13,13 +13,21 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   selector: 'page-feed',
   templateUrl: 'feed.html',
 })
+
 export class FeedPage {
+
+  public nome_usuario:string = "Glauber Braz";
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
+  public somaDeDoisNumeros(num1:number, num2:number, num3:number): void {
+    alert(num1+num2+num3);
+  }
+
   ionViewDidLoad() {
-    console.log('ionViewDidLoad FeedPage');
+    this.somaDeDoisNumeros(10,60,30);
+    this.somaDeDoisNumeros(-1,2,3);
   }
 
 }
