@@ -22,12 +22,12 @@ export class FeedPage {
   }
 
   public somaDeDoisNumeros(num1:number, num2:number, num3:number): void {
-    alert(num1+num2+num3);
+    //alert(num1+num2+num3);
   }
 
   ionViewDidLoad() {
-    this.somaDeDoisNumeros(10,60,30);
-    this.somaDeDoisNumeros(-1,2,3);
+    //this.somaDeDoisNumeros(10,60,30);
+    //this.somaDeDoisNumeros(-1,2,3);
   }
 
 }
