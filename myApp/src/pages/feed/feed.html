@@ -18,37 +18,36 @@
 <ion-content padding>
 
   <ion-card>
-
     <ion-item>
       <ion-avatar item-start>
         <img src="assets/imagens/marty-avatar.png">
       </ion-avatar>
-      <h2 class="feed_title">{{nome_usuario}}</h2>
-      <p class= "feed_date">March 28, 2018</p>
+      <h2 class="feed_title">{{ objeto_feed.titulo }}</h2>
+      <p class= "feed_date">{{ objeto_feed.data }}</p>
     </ion-item>
 
     <img src="assets/imagens/feed-image.png">
 
     <ion-card-content>
-      <p>i'm making a incredible app</p>
+      <p>{{ objeto_feed.descricao }}</p>
     </ion-card-content>
 
     <ion-row>
       <ion-col>
         <button ion-button icon-left clear small>
           <ion-icon name="thumbs-up"></ion-icon>
-          <div>12 Likes</div>
+          <div>{{ objeto_feed.qt_likes }} Likes</div>
         </button>
       </ion-col>
       <ion-col>
         <button ion-button icon-left clear small>
           <ion-icon name="text"></ion-icon>
-          <div>4 Comments</div>
+          <div> {{ objeto_feed.qt_comentarios }} Comments</div>
         </button>
       </ion-col>
       <ion-col center text-center>
         <ion-note>
-          11h ago
+          {{ objeto_feed.tempo_comentario }}
         </ion-note>
       </ion-col>
     </ion-row>
