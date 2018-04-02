@@ -31,6 +31,7 @@ export class FeedPage {
   }
 
   public nome_usuario:string = "Glauber Braz";
+  public lista_filmes = new Array<any>();
 
   constructor(
     public navCtrl: NavController, 
@@ -48,7 +49,10 @@ export class FeedPage {
     //this.somaDeDoisNumeros(-1,2,3);
     this.movieProvider.getLatestMovie().subscribe( 
       data => {
-        console.log(data);
+        const response = (data as any);
+        const objeto_retorno = JSON.parse(response._body);
+        this.lista_filmes = objeto_retorno.results;
+        console.log(objeto_retorno);
       }, error => {
         console.log(error);
       }
