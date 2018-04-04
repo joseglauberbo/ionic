@@ -14,6 +14,7 @@ import { HttpModule } from '@angular/http';
 import { FeedPageModule } from '../pages/feed/feed.module';
 import { IntroPageModule } from '../pages/intro/intro.module';
 import { MovieProvider } from '../providers/movie/movie';
+import { FeedPage } from '../pages/feed/feed';
 
 @NgModule({
   declarations: [
@@ -21,12 +22,13 @@ import { MovieProvider } from '../providers/movie/movie';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    FeedPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    FeedPageModule,
+    //FeedPageModule,
     IntroPageModule,
     HttpModule
   ],
@@ -36,13 +38,13 @@ import { MovieProvider } from '../providers/movie/movie';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    FeedPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    MovieProvider
   ]
 })
 export class AppModule {}
