@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { MovieProvider } from '../../providers/movie/movie';
 
 /**
@@ -21,6 +21,7 @@ import { MovieProvider } from '../../providers/movie/movie';
 
 export class FeedPage {
 
+
   public objeto_feed = {
       titulo: "Glauber Braz",
       data: "March 28, 2018",
@@ -29,14 +30,17 @@ export class FeedPage {
       qt_comentarios: 4,
       tempo_comentario: "11h ago"
   }
-
+  public loader;
+  public refresher;
+  public isRefreshing: boolean = false;
   public nome_usuario:string = "Glauber Braz";
   public lista_filmes = new Array<any>();
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    private movieProvider: MovieProvider
+    private movieProvider: MovieProvider,
+    public loadingCtrl: LoadingController,
     ) {
   }
 
@@ -44,16 +48,42 @@ export class FeedPage {
     //alert(num1+num2+num3);
   }
 
-  ionViewDidLoad() {
-    //this.somaDeDoisNumeros(10,60,30);
-    //this.somaDeDoisNumeros(-1,2,3);
+  ionViewDidEnter() {
+    this.carregarFilmes();
+  }
+
+  doRefresh(refresher) {
+    this.refresher = refresher;
+    this.isRefreshing = true;
+    this.carregarFilmes();
+  }
+
+  abreCarregando() {
+    this.loader = this.loadingCtrl.create({
+      content: "Carregando filmes...",
+    });
+    this.loader.present();
+  }
+
+  fechaCarregando(){
+    this.loader.dismiss();
+  }
+
+  carregarFilmes() {
+    this.abreCarregando();
     this.movieProvider.getLatestMovie().subscribe( 
       data => {
         const response = (data as any);
         const objeto_retorno = JSON.parse(response._body);
         this.lista_filmes = objeto_retorno.results;
         console.log(objeto_retorno);
+        this.fechaCarregando();
+        if (this.isRefreshing) {
+          this.refresher.complete();
+          this.isRefreshing = false;
+        }
       }, error => {
+        this.fechaCarregando();
         console.log(error);
       }
     )

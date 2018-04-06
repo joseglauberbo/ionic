@@ -16,7 +16,10 @@
   onde se acrescenta conteúdo na página
 -->
 <ion-content padding>
-
+  
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-card *ngFor= "let filme of lista_filmes">
     <ion-item>
       <ion-avatar item-start>
