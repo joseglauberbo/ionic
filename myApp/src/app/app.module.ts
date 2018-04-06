@@ -15,6 +15,11 @@ import { FeedPageModule } from '../pages/feed/feed.module';
 import { IntroPageModule } from '../pages/intro/intro.module';
 import { MovieProvider } from '../providers/movie/movie';
 import { FeedPage } from '../pages/feed/feed';
+import { ConfiguracoesPage } from '../pages/configuracoes/configuracoes';
+import { SobrePage } from '../pages/sobre/sobre';
+import { ConfiguracoesPageModule } from '../pages/configuracoes/configuracoes.module';
+import { SobrePageModule } from '../pages/sobre/sobre.module';
+import { PerfilPageModule } from '../pages/perfil/perfil.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +35,10 @@ import { FeedPage } from '../pages/feed/feed';
     IonicModule.forRoot(MyApp),
     //FeedPageModule,
     IntroPageModule,
-    HttpModule
+    HttpModule,
+    ConfiguracoesPageModule,
+    SobrePageModule,
+    PerfilPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
