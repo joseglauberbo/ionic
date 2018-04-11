@@ -36,7 +36,9 @@ export class FeedPage {
   public isRefreshing: boolean = false;
   public nome_usuario:string = "Glauber Braz";
   public lista_filmes = new Array<any>();
-
+  public page = 1;
+  public infiniteScroll;
+  
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -75,14 +77,27 @@ export class FeedPage {
     this.navCtrl.push(FilmeDetalhesPage, { id: filme.id} );
   }
 
-  carregarFilmes() {
+  doInfinite(infiniteScroll) {
+    this.page++;
+    this.infiniteScroll = infiniteScroll;
+    this.carregarFilmes(true);
+  }
+
+  carregarFilmes(newpage: boolean = false) {
     this.abreCarregando();
-    this.movieProvider.getLatestMovie().subscribe( 
+    this.movieProvider.getLatestMovie(this.page).subscribe( 
       data => {
         const response = (data as any);
         const objeto_retorno = JSON.parse(response._body);
-        this.lista_filmes = objeto_retorno.results;
-        console.log(objeto_retorno);
+
+        if(newpage) {
+          this.lista_filmes = this.lista_filmes.concat(objeto_retorno.results);
+          this.infiniteScroll.complete();
+        } else {
+          this.lista_filmes = objeto_retorno.results;
+        }
+        
+       
         this.fechaCarregando();
         if (this.isRefreshing) {
           this.refresher.complete();
